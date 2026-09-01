@@ -497,7 +497,10 @@ with tab_ingestion:
                     default_dept = "General Corporate"
                     default_ind = "General"
                     
-                    if "strategy" in fname_lower:
+                    if any(w in fname_lower for w in ["resume", "cv", "cover", "letter", "applicant", "candidate", "profile", "bio"]):
+                        default_cat = "HR / Career"
+                        default_dept = "HR"
+                    elif "strategy" in fname_lower:
                         default_cat = "Strategy"
                         default_dept = "Strategy"
                     elif "financial" in fname_lower or "revenue" in fname_lower or "budget" in fname_lower:
@@ -762,7 +765,24 @@ with tab_catalog:
             })
             
         import pandas as pd
-        st.dataframe(pd.DataFrame(registry_data), use_container_width=True)
+        df_registry = pd.DataFrame(registry_data)
+        st.dataframe(
+            df_registry,
+            use_container_width=True,
+            hide_index=True,
+            column_config={
+                "Filename": st.column_config.TextColumn("Filename", width="medium"),
+                "Format": st.column_config.TextColumn("Format", width="small"),
+                "Category": st.column_config.TextColumn("Category", width="small"),
+                "Department": st.column_config.TextColumn("Department", width="small"),
+                "Industry": st.column_config.TextColumn("Industry", width="small"),
+                "Version": st.column_config.TextColumn("Version", width="small"),
+                "Priority": st.column_config.TextColumn("Priority", width="small"),
+                "Ingestion Date": st.column_config.TextColumn("Ingestion Date", width="small"),
+                "Chunks Count": st.column_config.NumberColumn("Chunks", width="small"),
+                "Status": st.column_config.TextColumn("Status", width="small")
+            }
+        )
         
     st.subheader("Vector Database stats")
     st.metric(label="Total Chunks in Database", value=st.session_state.db_stats["chunks"])
