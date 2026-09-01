@@ -298,21 +298,6 @@ st.session_state.collection_name = vector_service.sanitize_collection_name(raw_c
 # Update active collection counts and synchronize local state with ChromaDB
 coll = vector_service.get_collection(st.session_state.collection_name)
 count = coll.count()
-
-# Fallback: If current collection is empty, check if any existing collection has chunks
-if count == 0:
-    try:
-        client = vector_service.get_client()
-        all_cols = client.list_collections()
-        for c in all_cols:
-            if c.count() > 0:
-                coll = c
-                count = c.count()
-                st.session_state.collection_name = c.name
-                break
-    except Exception:
-        pass
-
 st.session_state.db_stats["chunks"] = count
 
 # Auto-sync st.session_state.indexed_docs catalog entries with ChromaDB
@@ -485,7 +470,17 @@ with tab_ingestion:
                 st.session_state.doc_metadata = {}
                 
             st.markdown("### Review & Setup Document Metadata")
-            st.info("Set independent metadata parameters for each uploaded asset below:")
+            
+            # Check for non-enterprise document names and display corporate warning banner
+            non_ent_files = [u.name for u in uploaded_files if any(w in u.name.lower() for w in ["resume", "cv", "cover", "letter", "personal", "applicant", "candidate", "bio"])]
+            if non_ent_files:
+                st.warning(
+                    f"⚠️ **Non-Enterprise Document Warning**: The uploaded file(s) `{', '.join(non_ent_files)}` appear to be personal/non-corporate documents.\n\n"
+                    "This system is designed specifically for **Enterprise Corporate Research Documents** (e.g. Policies, Strategy Plans, Financial Reports, Operations Metrics). "
+                    "Please ensure you upload enterprise-related corporate documents for business research synthesis."
+                )
+            else:
+                st.info("Set independent metadata parameters for each uploaded asset below:")
             
             # Populate file metadata states if missing
             for u_file in uploaded_files:
