@@ -291,8 +291,8 @@ with st.sidebar:
         help="Department context for partition filter of document search."
     )
 
-# Calculate scope-aware collection name (tenant and department persistent)
-raw_col_name = f"rag_{st.session_state.tenant_id}_{st.session_state.department_id}"
+# Calculate scope-aware collection name (session-isolated for zero-default clean start)
+raw_col_name = f"rag_{st.session_state.tenant_id}_{st.session_state.department_id}_{st.session_state.session_id[:8]}"
 st.session_state.collection_name = vector_service.sanitize_collection_name(raw_col_name)
 
 # Update active collection counts and synchronize local state with ChromaDB
@@ -625,10 +625,15 @@ with tab_ingestion:
                         )
                         
                     try:
-                        # Step 1: File received
+                        # Step 1: File received & enterprise document validation
                         MAX_SIZE = 30 * 1024 * 1024
                         if u_file.size > MAX_SIZE:
                             raise ValueError("File exceeds maximum 30 MB size limit.")
+                        
+                        # Strict Enterprise Document Rejection Guard
+                        if any(w in fname.lower() for w in ["resume", "cv", "cover", "letter", "personal", "applicant", "candidate", "bio"]):
+                            raise ValueError("Non-enterprise document rejected. Only corporate enterprise documents (Policies, Strategy Plans, Financial Reports, Operations Metrics) are permitted.")
+                            
                         update_steps(1, "Parsing text content...")
                         
                         # Calculate stable content hash
