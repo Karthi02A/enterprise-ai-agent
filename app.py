@@ -90,6 +90,12 @@ html, body, [class*="css"], .stMarkdown {
     font-family: 'Outfit', sans-serif !important;
 }
 
+/* Smooth rendering & touch optimization globally */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+}
+
 .hero-title {
     font-size: 2.4rem;
     font-weight: 700;
@@ -132,6 +138,7 @@ section[data-testid="stSidebar"] {
     font-weight: 500 !important;
     width: 100% !important;
     transition: background-color 0.15s ease-in-out !important;
+    touch-action: manipulation !important;
 }
 
 .stButton>button:hover {
@@ -162,83 +169,210 @@ div[data-testid="column"] button:hover {
     border-color: #475569 !important;
 }
 
-/* Comprehensive Mobile & Touch Responsiveness Rules */
+/* ============================================= */
+/* TABLET BREAKPOINT (@media <= 768px)           */
+/* ============================================= */
 @media (max-width: 768px) {
-    /* Auto-scale hero typography for tablet/mobile */
-    .hero-title {
-        font-size: 1.5rem !important;
-        margin-top: 0.5rem !important;
-        margin-bottom: 0.2rem !important;
-        line-height: 1.25 !important;
-    }
-    .hero-subtitle {
-        font-size: 0.88rem !important;
-        margin-bottom: 1rem !important;
-        line-height: 1.4 !important;
-    }
+
+    /* === GLOBAL LAYOUT === */
     .block-container {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
         padding-top: 0.75rem !important;
         max-width: 100% !important;
     }
-    
-    /* Native-feel swipeable mobile tabs bar */
+
+    /* === HERO HEADER === */
+    .hero-title {
+        font-size: 1.45rem !important;
+        margin-top: 0.4rem !important;
+        margin-bottom: 0.15rem !important;
+        line-height: 1.2 !important;
+    }
+    .hero-subtitle {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.8rem !important;
+        line-height: 1.35 !important;
+    }
+
+    /* === SIDEBAR (slide-out panel) === */
+    section[data-testid="stSidebar"] {
+        width: 85vw !important;
+        max-width: 300px !important;
+    }
+    section[data-testid="stSidebar"] .stTextInput input,
+    section[data-testid="stSidebar"] .stSelectbox select {
+        font-size: 0.88rem !important;
+        min-height: 38px !important;
+    }
+
+    /* === NATIVE-FEEL SWIPEABLE TAB BAR === */
     .stTabs [data-baseweb="tab-list"] {
         display: flex !important;
-        gap: 4px !important;
+        gap: 2px !important;
         overflow-x: auto !important;
         white-space: nowrap !important;
         -webkit-overflow-scrolling: touch !important;
-        scrollbar-width: none !important; /* Firefox */
+        scrollbar-width: none !important;
         padding-bottom: 4px !important;
     }
     .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
-        display: none !important; /* Safari & Chrome */
+        display: none !important;
     }
     .stTabs [data-baseweb="tab"] {
         flex-shrink: 0 !important;
-        padding: 6px 12px !important;
-        font-size: 0.82rem !important;
+        padding: 6px 10px !important;
+        font-size: 0.78rem !important;
         border-radius: 6px !important;
     }
-    
-    /* Mobile Chat bubbles & Input box */
-    .stChatMessage {
-        padding: 0.65rem 0.75rem !important;
+
+    /* === FILE UPLOADER (Tab 1) === */
+    div[data-testid="stFileUploader"] {
+        padding: 0.5rem !important;
+    }
+    div[data-testid="stFileUploader"] section {
+        padding: 0.75rem !important;
+    }
+
+    /* === METADATA FORM - Stack 2-col to 1-col === */
+    div[data-testid="column"] {
+        min-width: 100% !important;
+        flex: 1 1 100% !important;
+    }
+    /* Compact form inputs */
+    .stTextInput input, .stSelectbox select, .stDateInput input {
+        font-size: 0.88rem !important;
+        min-height: 36px !important;
+    }
+    .stSlider {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    /* === EXPANDERS (metadata cards per file) === */
+    div[data-testid="stExpander"] {
         border-radius: 8px !important;
-        margin-bottom: 0.5rem !important;
     }
-    .stChatMessage [data-testid="stMarkdownContainer"] p {
-        font-size: 0.92rem !important;
-        line-height: 1.45 !important;
+    div[data-testid="stExpander"] summary {
+        font-size: 0.88rem !important;
+        padding: 0.5rem 0.75rem !important;
     }
-    
-    /* Responsive DataTables & Catalog Tables */
+
+    /* === METRIC CARDS (Telemetry KPI tiles) === */
+    div[data-testid="stMetric"] {
+        padding: 0.5rem !important;
+    }
+    div[data-testid="stMetric"] label {
+        font-size: 0.72rem !important;
+    }
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+        font-size: 1.1rem !important;
+    }
+
+    /* === DATA TABLES (Catalog + Telemetry Logs) === */
     div[data-testid="stDataFrame"], div[data-testid="stTable"] {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
     }
-    
-    /* Sidebar mobile trigger optimization */
-    section[data-testid="stSidebar"] {
-        width: 85vw !important;
-        max-width: 320px !important;
+
+    /* === CHAT MESSAGES & INPUT (Research Workspace) === */
+    .stChatMessage {
+        padding: 0.55rem 0.65rem !important;
+        border-radius: 8px !important;
+        margin-bottom: 0.4rem !important;
+    }
+    .stChatMessage [data-testid="stMarkdownContainer"] p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+    }
+    div[data-testid="stChatInput"] {
+        padding: 0.4rem !important;
+    }
+    div[data-testid="stChatInput"] textarea {
+        font-size: 0.9rem !important;
+        min-height: 40px !important;
+    }
+
+    /* === RADIO BUTTONS (Research Depth) === */
+    .stRadio > div {
+        gap: 0.5rem !important;
+    }
+    .stRadio label {
+        font-size: 0.85rem !important;
+        padding: 4px 8px !important;
+    }
+
+    /* === BUTTONS (general) === */
+    .stButton>button {
+        font-size: 0.88rem !important;
+        padding: 0.45rem 0.75rem !important;
+        min-height: 38px !important;
+    }
+
+    /* === ALERTS / INFO / WARNING / SUCCESS bars === */
+    div[data-testid="stAlert"] {
+        padding: 0.5rem 0.75rem !important;
+        font-size: 0.85rem !important;
     }
 }
 
+/* ============================================= */
+/* SMALL PHONE BREAKPOINT (@media <= 480px)      */
+/* ============================================= */
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
+        margin-top: 0.3rem !important;
     }
     .hero-subtitle {
-        font-size: 0.82rem !important;
+        font-size: 0.78rem !important;
+        margin-bottom: 0.6rem !important;
     }
-    /* Compact feedback voting column spacing for small phones */
+    .block-container {
+        padding-left: 0.35rem !important;
+        padding-right: 0.35rem !important;
+    }
+
+    /* Ultra-compact tab labels */
+    .stTabs [data-baseweb="tab"] {
+        padding: 5px 7px !important;
+        font-size: 0.72rem !important;
+    }
+
+    /* Feedback buttons tighter for small screens */
     div[data-testid="column"] button {
-        padding: 2px 8px !important;
-        font-size: 0.8rem !important;
-        min-height: 32px !important;
+        padding: 2px 6px !important;
+        font-size: 0.78rem !important;
+        min-height: 30px !important;
+    }
+
+    /* Telemetry metrics - 2x2 grid friendly */
+    div[data-testid="stMetric"] label {
+        font-size: 0.65rem !important;
+    }
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+        font-size: 0.95rem !important;
+    }
+
+    /* Chat messages even more compact */
+    .stChatMessage {
+        padding: 0.4rem 0.5rem !important;
+    }
+    .stChatMessage [data-testid="stMarkdownContainer"] p {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* ============================================= */
+/* VIEWPORT META (prevent zooming on double-tap) */
+/* ============================================= */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device only: larger touch targets */
+    .stButton>button, div[data-testid="column"] button {
+        min-height: 40px !important;
+    }
+    input, select, textarea {
+        font-size: 16px !important; /* Prevents iOS zoom on focus */
     }
 }
 </style>
@@ -1041,13 +1175,15 @@ with tab_telemetry:
         latencies = [log["total_latency"] for log in logs if log["total_latency"] > 0]
         avg_lat = np.mean(latencies) if latencies else 0.0
         
-        col_t1, col_t2, col_t3, col_t4 = st.columns(4)
+        col_t1, col_t2 = st.columns(2)
         with col_t1:
-            st.metric("Total Queries Processed", value=total_q)
+            st.metric("Total Queries", value=total_q)
         with col_t2:
             st.metric("Cache Hit Ratio", value=f"{hit_ratio:.1f}%")
+        
+        col_t3, col_t4 = st.columns(2)
         with col_t3:
-            st.metric("Average Request latency", value=f"{avg_lat:.2f} s")
+            st.metric("Avg Latency", value=f"{avg_lat:.2f}s")
         with col_t4:
             # Positive ratings count
             positive_votes = sum(1 for log in logs if log.get("feedback") == 1)
