@@ -141,19 +141,20 @@ section[data-testid="stSidebar"] {
 
 /* Compact Feedback Buttons Overrides */
 div[data-testid="column"] button {
-    min-height: 30px !important;
-    height: 30px !important;
-    padding: 2px 10px !important;
+    min-height: 34px !important;
+    height: 34px !important;
+    padding: 4px 12px !important;
     background-color: #1e293b !important;
     border: 1px solid #334155 !important;
     border-radius: 6px !important;
     color: #f8fafc !important;
-    font-size: 0.85rem !important;
+    font-size: 0.88rem !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     box-shadow: none !important;
     width: auto !important;
+    touch-action: manipulation !important;
 }
 
 div[data-testid="column"] button:hover {
@@ -161,34 +162,83 @@ div[data-testid="column"] button:hover {
     border-color: #475569 !important;
 }
 
-/* Mobile Responsiveness Rules */
+/* Comprehensive Mobile & Touch Responsiveness Rules */
 @media (max-width: 768px) {
+    /* Auto-scale hero typography for tablet/mobile */
     .hero-title {
-        font-size: 1.6rem !important;
+        font-size: 1.5rem !important;
         margin-top: 0.5rem !important;
+        margin-bottom: 0.2rem !important;
+        line-height: 1.25 !important;
     }
     .hero-subtitle {
-        font-size: 0.92rem !important;
+        font-size: 0.88rem !important;
         margin-bottom: 1rem !important;
+        line-height: 1.4 !important;
     }
     .block-container {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
-        padding-top: 1rem !important;
+        padding-top: 0.75rem !important;
+        max-width: 100% !important;
     }
+    
+    /* Native-feel swipeable mobile tabs bar */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 2px !important;
+        display: flex !important;
+        gap: 4px !important;
         overflow-x: auto !important;
         white-space: nowrap !important;
         -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important; /* Firefox */
+        padding-bottom: 4px !important;
+    }
+    .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
+        display: none !important; /* Safari & Chrome */
     }
     .stTabs [data-baseweb="tab"] {
-        padding: 6px 10px !important;
+        flex-shrink: 0 !important;
+        padding: 6px 12px !important;
+        font-size: 0.82rem !important;
+        border-radius: 6px !important;
+    }
+    
+    /* Mobile Chat bubbles & Input box */
+    .stChatMessage {
+        padding: 0.65rem 0.75rem !important;
+        border-radius: 8px !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .stChatMessage [data-testid="stMarkdownContainer"] p {
+        font-size: 0.92rem !important;
+        line-height: 1.45 !important;
+    }
+    
+    /* Responsive DataTables & Catalog Tables */
+    div[data-testid="stDataFrame"], div[data-testid="stTable"] {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    /* Sidebar mobile trigger optimization */
+    section[data-testid="stSidebar"] {
+        width: 85vw !important;
+        max-width: 320px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 1.3rem !important;
+    }
+    .hero-subtitle {
         font-size: 0.82rem !important;
     }
-    .stChatMessage {
-        padding: 0.6rem !important;
-        border-radius: 8px !important;
+    /* Compact feedback voting column spacing for small phones */
+    div[data-testid="column"] button {
+        padding: 2px 8px !important;
+        font-size: 0.8rem !important;
+        min-height: 32px !important;
     }
 }
 </style>
