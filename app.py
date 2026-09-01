@@ -178,95 +178,131 @@ div[data-testid="column"] button:hover {
     .block-container {
         padding-left: 0.5rem !important;
         padding-right: 0.5rem !important;
-        padding-top: 0.75rem !important;
+        padding-top: 0.5rem !important;
         max-width: 100% !important;
+    }
+
+    /* === ALL HEADINGS - Critical mobile fix === */
+    h1 {
+        font-size: 1.3rem !important;
+        line-height: 1.2 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    h2 {
+        font-size: 1.1rem !important;
+        line-height: 1.25 !important;
+        margin-top: 0.5rem !important;
+        margin-bottom: 0.3rem !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    h3 {
+        font-size: 0.95rem !important;
+        line-height: 1.3 !important;
+        margin-top: 0.4rem !important;
+        margin-bottom: 0.25rem !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+    }
+    /* General paragraph text */
+    p, .stMarkdown p, li {
+        font-size: 0.88rem !important;
+        line-height: 1.4 !important;
+        word-wrap: break-word !important;
     }
 
     /* === HERO HEADER === */
     .hero-title {
-        font-size: 1.45rem !important;
-        margin-top: 0.4rem !important;
-        margin-bottom: 0.15rem !important;
+        font-size: 1.25rem !important;
+        margin-top: 0.3rem !important;
+        margin-bottom: 0.1rem !important;
         line-height: 1.2 !important;
     }
     .hero-subtitle {
-        font-size: 0.85rem !important;
-        margin-bottom: 0.8rem !important;
-        line-height: 1.35 !important;
+        font-size: 0.8rem !important;
+        margin-bottom: 0.5rem !important;
+        line-height: 1.3 !important;
     }
 
     /* === SIDEBAR (slide-out panel) === */
     section[data-testid="stSidebar"] {
-        width: 85vw !important;
-        max-width: 300px !important;
+        width: 82vw !important;
+        max-width: 280px !important;
     }
     section[data-testid="stSidebar"] .stTextInput input,
     section[data-testid="stSidebar"] .stSelectbox select {
-        font-size: 0.88rem !important;
-        min-height: 38px !important;
+        font-size: 0.85rem !important;
+        min-height: 36px !important;
     }
 
     /* === NATIVE-FEEL SWIPEABLE TAB BAR === */
     .stTabs [data-baseweb="tab-list"] {
         display: flex !important;
-        gap: 2px !important;
+        gap: 1px !important;
         overflow-x: auto !important;
         white-space: nowrap !important;
         -webkit-overflow-scrolling: touch !important;
         scrollbar-width: none !important;
-        padding-bottom: 4px !important;
+        padding-bottom: 3px !important;
     }
     .stTabs [data-baseweb="tab-list"]::-webkit-scrollbar {
         display: none !important;
     }
     .stTabs [data-baseweb="tab"] {
         flex-shrink: 0 !important;
-        padding: 6px 10px !important;
-        font-size: 0.78rem !important;
-        border-radius: 6px !important;
+        padding: 5px 8px !important;
+        font-size: 0.72rem !important;
+        border-radius: 5px !important;
     }
 
     /* === FILE UPLOADER (Tab 1) === */
     div[data-testid="stFileUploader"] {
-        padding: 0.5rem !important;
+        padding: 0.3rem !important;
     }
     div[data-testid="stFileUploader"] section {
-        padding: 0.75rem !important;
+        padding: 0.5rem !important;
     }
 
-    /* === METADATA FORM - Stack 2-col to 1-col === */
-    div[data-testid="column"] {
+    /* === METADATA FORM inside expanders - Stack 2-col to 1-col === */
+    /* Scoped ONLY to expander content so tab bar and feedback columns are not affected */
+    div[data-testid="stExpander"] div[data-testid="column"] {
         min-width: 100% !important;
         flex: 1 1 100% !important;
     }
     /* Compact form inputs */
-    .stTextInput input, .stSelectbox select, .stDateInput input {
-        font-size: 0.88rem !important;
-        min-height: 36px !important;
+    .stTextInput input, .stSelectbox > div > div, .stDateInput input {
+        font-size: 0.85rem !important;
+        min-height: 34px !important;
     }
     .stSlider {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
+    /* Compact form labels */
+    .stTextInput label, .stSelectbox label, .stDateInput label, .stSlider label {
+        font-size: 0.8rem !important;
+    }
 
     /* === EXPANDERS (metadata cards per file) === */
     div[data-testid="stExpander"] {
-        border-radius: 8px !important;
+        border-radius: 6px !important;
+        margin-bottom: 0.3rem !important;
     }
     div[data-testid="stExpander"] summary {
-        font-size: 0.88rem !important;
-        padding: 0.5rem 0.75rem !important;
+        font-size: 0.82rem !important;
+        padding: 0.4rem 0.6rem !important;
     }
 
     /* === METRIC CARDS (Telemetry KPI tiles) === */
     div[data-testid="stMetric"] {
-        padding: 0.5rem !important;
+        padding: 0.4rem !important;
     }
     div[data-testid="stMetric"] label {
-        font-size: 0.72rem !important;
+        font-size: 0.68rem !important;
     }
     div[data-testid="stMetric"] [data-testid="stMetricValue"] {
-        font-size: 1.1rem !important;
+        font-size: 1rem !important;
     }
 
     /* === DATA TABLES (Catalog + Telemetry Logs) === */
@@ -277,42 +313,47 @@ div[data-testid="column"] button:hover {
 
     /* === CHAT MESSAGES & INPUT (Research Workspace) === */
     .stChatMessage {
-        padding: 0.55rem 0.65rem !important;
+        padding: 0.45rem 0.5rem !important;
         border-radius: 8px !important;
-        margin-bottom: 0.4rem !important;
+        margin-bottom: 0.35rem !important;
     }
     .stChatMessage [data-testid="stMarkdownContainer"] p {
-        font-size: 0.9rem !important;
-        line-height: 1.4 !important;
+        font-size: 0.85rem !important;
+        line-height: 1.35 !important;
     }
     div[data-testid="stChatInput"] {
-        padding: 0.4rem !important;
+        padding: 0.3rem !important;
     }
     div[data-testid="stChatInput"] textarea {
-        font-size: 0.9rem !important;
-        min-height: 40px !important;
+        font-size: 0.88rem !important;
+        min-height: 38px !important;
     }
 
     /* === RADIO BUTTONS (Research Depth) === */
     .stRadio > div {
-        gap: 0.5rem !important;
+        gap: 0.4rem !important;
     }
     .stRadio label {
-        font-size: 0.85rem !important;
-        padding: 4px 8px !important;
+        font-size: 0.82rem !important;
+        padding: 3px 6px !important;
     }
 
     /* === BUTTONS (general) === */
     .stButton>button {
-        font-size: 0.88rem !important;
-        padding: 0.45rem 0.75rem !important;
-        min-height: 38px !important;
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0.6rem !important;
+        min-height: 36px !important;
     }
 
-    /* === ALERTS / INFO / WARNING / SUCCESS bars === */
+    /* === ALERTS / INFO / WARNING / SUCCESS === */
     div[data-testid="stAlert"] {
-        padding: 0.5rem 0.75rem !important;
-        font-size: 0.85rem !important;
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.82rem !important;
+    }
+
+    /* === CHECKBOX / TOGGLE === */
+    .stCheckbox label {
+        font-size: 0.82rem !important;
     }
 }
 
@@ -321,58 +362,60 @@ div[data-testid="column"] button:hover {
 /* ============================================= */
 @media (max-width: 480px) {
     .hero-title {
-        font-size: 1.2rem !important;
-        margin-top: 0.3rem !important;
+        font-size: 1.1rem !important;
+        margin-top: 0.2rem !important;
     }
     .hero-subtitle {
-        font-size: 0.78rem !important;
-        margin-bottom: 0.6rem !important;
+        font-size: 0.72rem !important;
+        margin-bottom: 0.4rem !important;
     }
     .block-container {
-        padding-left: 0.35rem !important;
-        padding-right: 0.35rem !important;
+        padding-left: 0.25rem !important;
+        padding-right: 0.25rem !important;
     }
+    h1 { font-size: 1.15rem !important; }
+    h2 { font-size: 0.95rem !important; }
+    h3 { font-size: 0.85rem !important; }
 
     /* Ultra-compact tab labels */
     .stTabs [data-baseweb="tab"] {
-        padding: 5px 7px !important;
-        font-size: 0.72rem !important;
-    }
-
-    /* Feedback buttons tighter for small screens */
-    div[data-testid="column"] button {
-        padding: 2px 6px !important;
-        font-size: 0.78rem !important;
-        min-height: 30px !important;
-    }
-
-    /* Telemetry metrics - 2x2 grid friendly */
-    div[data-testid="stMetric"] label {
+        padding: 4px 6px !important;
         font-size: 0.65rem !important;
     }
-    div[data-testid="stMetric"] [data-testid="stMetricValue"] {
-        font-size: 0.95rem !important;
+
+    /* Feedback buttons tighter */
+    div[data-testid="column"] button {
+        padding: 2px 5px !important;
+        font-size: 0.75rem !important;
+        min-height: 28px !important;
     }
 
-    /* Chat messages even more compact */
+    /* Metric cards */
+    div[data-testid="stMetric"] label {
+        font-size: 0.6rem !important;
+    }
+    div[data-testid="stMetric"] [data-testid="stMetricValue"] {
+        font-size: 0.88rem !important;
+    }
+
+    /* Chat messages */
     .stChatMessage {
-        padding: 0.4rem 0.5rem !important;
+        padding: 0.3rem 0.4rem !important;
     }
     .stChatMessage [data-testid="stMarkdownContainer"] p {
-        font-size: 0.85rem !important;
+        font-size: 0.82rem !important;
     }
 }
 
 /* ============================================= */
-/* VIEWPORT META (prevent zooming on double-tap) */
+/* TOUCH DEVICE ONLY (phones & tablets)          */
 /* ============================================= */
 @media (hover: none) and (pointer: coarse) {
-    /* Touch device only: larger touch targets */
     .stButton>button, div[data-testid="column"] button {
-        min-height: 40px !important;
+        min-height: 38px !important;
     }
     input, select, textarea {
-        font-size: 16px !important; /* Prevents iOS zoom on focus */
+        font-size: 16px !important; /* Prevents iOS auto-zoom on input focus */
     }
 }
 </style>
