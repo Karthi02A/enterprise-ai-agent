@@ -743,7 +743,24 @@ with tab_ingestion:
 # TAB 2: KNOWLEDGE CATALOG
 # ====================================================
 with tab_catalog:
-    st.subheader("Asset Registry")
+    col_cat_h1, col_cat_h2 = st.columns([3, 1])
+    with col_cat_h1:
+        st.subheader("Asset Registry")
+    with col_cat_h2:
+        if st.button("🗑️ Clear All Assets", help="Purge all indexed documents and demo files from database"):
+            vector_service.delete_collection(st.session_state.collection_name)
+            cache_service.invalidate_cache(
+                tenant_id=st.session_state.tenant_id,
+                session_id=st.session_state.session_id,
+                department=st.session_state.department_id
+            )
+            if hasattr(retrieval_service.get_bm25_index, "clear"):
+                retrieval_service.get_bm25_index.clear()
+            st.session_state.indexed_docs = []
+            st.session_state.doc_metadata = {}
+            st.session_state.db_stats = {"chunks": 0, "pdfs": 0, "docx": 0, "xlsx": 0, "csv": 0}
+            st.toast("Knowledge base purged!")
+            st.rerun()
     
     if not st.session_state.indexed_docs:
         st.info("No corporate assets ingested. Upload files using the 'Ingest Documents' tab.")
